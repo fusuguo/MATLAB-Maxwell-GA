@@ -85,7 +85,6 @@ y = ys / 2;
 x = 270;
 R = 100;
 MaxCreateBY(fid);
-open = 0;
 for i = 1:2
     i_n = num2str(i);
     doc_count = 1;
@@ -101,9 +100,9 @@ for i = 1:2
     %生成截面
 %    
     %取点
-    
-    if i == 1 || i == 21
-        open = 1;
+    swi = 0;
+    if i == 1 || i == 22
+        swi = 1;
         Mag_Name = "Mag_Y_";
         Mag_Name = strcat(Mag_Name,i_n);
         MaxFieldBY(fid,Mag_Name,CS_Name);
@@ -118,13 +117,8 @@ for i = 1:2
         MaxReport(fid,FileName,Circle,R_p);
     end
 
-
 end
-    
-    if open == 1
-        MaxPrint(fid);
-        open = 0;
-    end
+
 % for i = 1:2
 %     i_n = num2str(i);
 %     CS_Name = "CS_Ob_";

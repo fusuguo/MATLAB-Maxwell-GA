@@ -1,0 +1,5 @@
+function MaxField(fid,NameMag,NameCS)
+	fprintf(fid,'\n\nSet oModule = oDesign.GetModule("FieldsReporter")\n');
+    fprintf(fid,'oModule.CreateFieldPlot Array("NAME:%s", "SolutionName:=", "Setup1 : LastAdaptive", "QuantityName:=", "B_Y", "PlotFolder:=", "NamedExpr", "UserSpecifyName:=", 0, "UserSpecifyFolder:=", 0, "StreamlinePlot:=", false, "IntrinsicVar:=", "", "PlotGeomInfo:=", Array(1,"Surface", "CutPlane", 1, "%s:XY"), "FilterBoxes:=", Array(1, "BoxObserve"), Array("NAME:PlotOnSurfaceSettings", "Filled:=",true, "IsoValType:=", "Line", "SmoothShade:=", true, "AddGrid:=", false, "MapTransparency:=", true, "Refinement:=", 0, "Transparency:=", 0.509999990463257, Array("NAME:Arrow3DSpacingSettings", "ArrowUniform:=", true, "ArrowSpacing:=", 0, "MinArrowSpacing:=", 0, "MaxArrowSpacing:=", 0), "GridColor:=", Array( 128, 255, 0)))',NameMag,NameCS);
+
+end
