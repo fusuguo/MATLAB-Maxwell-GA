@@ -8,12 +8,12 @@ function MaxSection(fid, level, n, section_n)
     for f_s = 1:2
 
         if f_s == 2
-            % æ›´æ”¹åæ ‡è½´
+            % ¸ü¸Ä×ø±êÖá
             ChangeCS(fid, 1);
         end
 
         fprintf(fid, '\n');
-        % åˆ›å»ºæˆªé¢
+        % ´´½¨½ØÃæ
         fprintf(fid, 'oEditor.Section Array("NAME:Selections", "Selections:=","');
 
         for i = 1:n
@@ -27,7 +27,7 @@ function MaxSection(fid, level, n, section_n)
         fprintf(fid, '","NewPartsModelFlag:=", "Model"), Array("NAME:SectionToParameters", "CreateNewObjects:=", true, "SectionPlane:=", "YZ", "SectionCrossObject:=", false)');
         fprintf(fid, '\n');
 
-        %é¦–æ¬¡æˆªé¢åˆ›å»º
+        %Ê×´Î½ØÃæ´´½¨
         if f_s == 1
             fprintf(fid, 'Set oModule = oDesign.GetModule("BoundarySetup")');
         end
