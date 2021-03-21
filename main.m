@@ -86,7 +86,7 @@ x = 270;
 R = 100;
 MaxCreateBY(fid);
 open = 0;
-for i = 1:2
+for i = 1:21
     i_n = num2str(i);
     doc_count = 1;
     CS_Name = "CS_Ob_";
@@ -96,35 +96,44 @@ for i = 1:2
     FileName = "Report_";
     FileName = strcat(FileName,i_n);
 
-    z = 158 + i;
-    CreateCS(fid, CS_Name, x, y, z);
-    %生成截面
-%    
-    %取点
+    z = 59 + 10*i;
     
-    if i == 1 || i == 21
-        open = 1;
-        Mag_Name = "Mag_Y_";
-        Mag_Name = strcat(Mag_Name,i_n);
-        MaxFieldBY(fid,Mag_Name,CS_Name);
-        ChangeCS(fid, 0);
-        MaxGetPoint(fid, x, y, z,FileName);
-    else
+    %生成截面
+
+    if i == 1
+        continue
+    end
+    if i == 21
+        z = 169;
+        MaxChangeCStoXZ(fid);
+        R_tem = 100;
+        MaxBuildCir(fid,Circle,z,-y,R_tem);
+        R_p = 2*pi*R_tem;
+        MaxReport(fid,FileName,Circle,R_p);
+        break
+    end 
+        CreateCS(fid, CS_Name, x, y, z);
         ChangeCS(fid, 0);
         h = 10*abs(11 - i);
-            R_tem = sqrt(R^2 - h^2);
+        R_tem = sqrt(R^2 - h^2);
         MaxBuildCir(fid,Circle,y,z,R_tem);
         R_p = 2*pi*R_tem;
         MaxReport(fid,FileName,Circle,R_p);
     end
 
 
-end
+%    
+    %取点
     
-    if open == 1
-        MaxPrint(fid);
-        open = 0;
-    end
+%     if i == 1 || i == 21
+%         open = 1;
+%         Mag_Name = "Mag_Y_";
+%         Mag_Name = strcat(Mag_Name,i_n);
+%         MaxFieldBY(fid,Mag_Name,CS_Name);
+%         ChangeCS(fid, 0);
+%         MaxGetPoint(fid, x, y, z,FileName);
+%     else
+
 % for i = 1:2
 %     i_n = num2str(i);
 %     CS_Name = "CS_Ob_";
