@@ -1,26 +1,26 @@
-%% ÀûÓÃÈí¼ş°ü´´½¨Ò»¸öÔ²ÖùÌå
+%% åˆ©ç”¨è½¯ä»¶åŒ…åˆ›å»ºä¸€ä¸ªåœ†æŸ±ä½“
 clear all;
 false = 0;
 true = 1;
-%% HFSSÖ´ĞĞÂ·¾¶
+%% HFSSæ‰§è¡Œè·¯å¾„
 hfssExePath = 'C:\Program Files\AnsysEM\Maxwell16.0\Win64\maxwell.exe';
-% ÁÙÊ±ÎÄ¼şÂ·¾¶
+% ä¸´æ—¶æ–‡ä»¶è·¯å¾„
 tmpPrjFile = 'C:\Users\95340\Desktop\MRI\api\testing3_16_1.mxwl';
 %tmpDataFile = 'E:\ansoft\temp\tmpData.dat';
 tmpScriptFile = 'C:\Users\95340\Desktop\MRI\api\testing3_16_1.vbs';
-% ´´½¨Ò»¸öĞÂµÄHFSSÁÙÊ±½Å±¾ÎÄ¼ş
-fid = fopen(tmpScriptFile, 'wt'); % 'wt'±íÊ¾ÒÔÎÄ±¾Ä£Ê½´ò¿ªÎÄ¼ş£¬¿ÉĞ´£¬¸²¸ÇÔ­ÓĞÄÚÈİ
-%% ´´½¨Ò»¸öĞÂµÄ¹¤³Ì²¢²åÈëÒ»¸öĞÂµÄÉè¼Æ Éè¼Æ²ÎÊı
+% åˆ›å»ºä¸€ä¸ªæ–°çš„HFSSä¸´æ—¶è„šæœ¬æ–‡ä»¶
+fid = fopen(tmpScriptFile, 'wt'); % 'wt'è¡¨ç¤ºä»¥æ–‡æœ¬æ¨¡å¼æ‰“å¼€æ–‡ä»¶ï¼Œå¯å†™ï¼Œè¦†ç›–åŸæœ‰å†…å®¹
+%% åˆ›å»ºä¸€ä¸ªæ–°çš„å·¥ç¨‹å¹¶æ’å…¥ä¸€ä¸ªæ–°çš„è®¾è®¡ è®¾è®¡å‚æ•°
 hfssNewProject(fid);
 hfssInsertDesign(fid, 'Testing3_16_1');
-% ÏßÈ¦ÊıÄ¿
+% çº¿åœˆæ•°ç›®
 n = 10;
-% ²ãÊı nc = 4;
-% ÏßÈ¦¿í¶È ys
+% å±‚æ•° nc = 4;
+% çº¿åœˆå®½åº¦ ys
 ys = 20;
 d = 10;
-%% ´´½¨Ä£ĞÍ&µçÁ÷
-%´´½¨×ø±êÖáCS1
+%% åˆ›å»ºæ¨¡å‹&ç”µæµ
+%åˆ›å»ºåæ ‡è½´CS1
 CreateCSBox(fid);
 FRP_copper = "copper";
 count = 1;
@@ -38,9 +38,9 @@ for level = 1:4
         zp = 338;
     end
 
-    %¸Ä»Øglobal CS
+    %æ”¹å›global CS
     ChangeCS(fid, 0);
-    %½¨Á¢µ×²ãÏßÂ·
+    %å»ºç«‹åº•å±‚çº¿è·¯
     level_s = num2str(level);
 
     for i = 1:n
@@ -50,18 +50,18 @@ for level = 1:4
         BoxName = strcat('BOX_', level_s);
         BoxName = strcat(BoxName, '_');
         BoxName = strcat(BoxName, i_n);
-        %½¨Á¢µ×²ãÏßÂ·
+        %å»ºç«‹åº•å±‚çº¿è·¯
         MaxBoxFRP(fid, BoxName, ys, yp, zs, zp, FRP_copper);
     end
 
     fprintf(fid, '\n');
     level_s = num2str(level);
     section_n = count * 2 - 1;
-    MaxSection(fid, level_s, n, section_n); %½¨Á¢½ØÃæ²¢Ìí¼ÓµçÁ÷
+    MaxSection(fid, level_s, n, section_n); %å»ºç«‹æˆªé¢å¹¶æ·»åŠ ç”µæµ
     %count = count + 1;
 end
 
-%% Ìí¼Ó¹Û²âÇøÓò
+%% æ·»åŠ è§‚æµ‹åŒºåŸŸ
 ChangeCS(fid, 0);
 FRP_vacuum = "vacuum";
 BoxName_ob = "BoxObserve";
@@ -70,17 +70,17 @@ zp = 0;
 ys = yp + ys;
 yp = 0;
 MaxBoxFRP(fid, BoxName_ob, ys, yp, zs, zp, FRP_vacuum);
-% Ìí¼Ó5±¶¹Û²âÇøÓò
+% æ·»åŠ 5å€è§‚æµ‹åŒºåŸŸ
 
-%% Ìí¼Óanalysis
-count_i = 10; %µü´ú´ÎÊı
+%% æ·»åŠ analysis
+count_i = 10; %è¿­ä»£æ¬¡æ•°
 p_error = 1;
 Maxanlysis(fid, count_i, p_error);
 
-%% ¿ªÊ¼ÔËĞĞ
+%% å¼€å§‹è¿è¡Œ
 MaxRun(fid);
 
-%% Éú³É¹Û²âÃæ²¢È¡µã
+%% ç”Ÿæˆè§‚æµ‹é¢å¹¶å–ç‚¹
 y = ys / 2;
 x = 270;
 R = 100;
@@ -98,7 +98,7 @@ for i = 1:21
 
     z = 59 + 10*i;
     
-    %Éú³É½ØÃæ
+    %ç”Ÿæˆæˆªé¢
 
     if i == 1
         continue
@@ -122,72 +122,8 @@ for i = 1:21
     end
 
 
-%    
-    %È¡µã
-    
-%     if i == 1 || i == 21
-%         open = 1;
-%         Mag_Name = "Mag_Y_";
-%         Mag_Name = strcat(Mag_Name,i_n);
-%         MaxFieldBY(fid,Mag_Name,CS_Name);
-%         ChangeCS(fid, 0);
-%         MaxGetPoint(fid, x, y, z,FileName);
-%     else
 
-% for i = 1:2
-%     i_n = num2str(i);
-%     CS_Name = "CS_Ob_";
-%     CS_Name = strcat(CS_Name, i_n);
-%     Mag_Name = "Mag_";
-%     Mag_Name = strcat(Mag_Name,i_n);
-%     z = 158 + i;
-%     CreateCS(fid, CS_Name, x, y, z);
-%     %Éú³É½ØÃæ
-%     MaxField(fid,Mag_Name,CS_Name);
-%     %È¡µã
-%     if i == 1 || i == 21
-%         ChangeCS(fid, 0);
-%         MaxGetPoint(fid, x, y, z);
-%     else
-%         ChangeCS(fid, 0);
-%         for j = 1:180
-%             h = abs(11 - i);
-%             R_tem = sqrt(R^2 - h^2);
-%             x_p = R_tem * sind(2*j);
-%             y_p = R_tem * cosd(2*j);
-%             MaxGetPoint(fid, x+x_p, y+y_p, z);
-%         end
-%     end
-% 
-%     ChangeCS(fid, 0);
-% end
-
-% for i = 1:21
-%     i_n = num2str(i);
-%     CS_Name = strcat(CS_Name, i_n);
-%     z = 158 + i;
-%     CreateCS(fid, CS_Name, x, y, z);
-%     %Éú³É½ØÃæ
-%     MaxField(fid);
-%     %È¡µã
-%     if i == 1 || i == 21
-%         MaxGetPoint(fid, x, y, z);
-%     else
-%         for j = 1:360
-%             h = abs(11 - i);
-%             R_tem = sqrt(R^2 - h^2);
-%             x_p = R_tem * sind(j);
-%             y_p = R_tem * cosd(j);
-%             MaxGetPoint(fid, x_p, y_p, z)
-%         end
-%     end
-% 
-%     ChangeCS(fid, 0);
-% end
-
-% µ¼³öcsvÎÄ¼ş
-
-%% ±£´æÎÄ¼ş
+%% ä¿å­˜æ–‡ä»¶
 hfssSaveProject(fid, tmpPrjFile, true);
 fclose(fid);
 fclose('all');
