@@ -1,0 +1,5 @@
+function MaxFiveRegion(fid,Name)
+    fprintf(fid,'\noEditor.CreateRegion Array("NAME:RegionParameters", "+XPaddingType:=", "Percentage Offset", "+XPadding:=", "0", "-XPaddingType:=", "Percentage Offset", "-XPadding:=", "0", "+YPaddingType:=", "Percentage Offset", "+YPadding:=", "500", "-YPaddingType:=",   "Percentage Offset", "-YPadding:=", "500", "+ZPaddingType:=",   "Percentage Offset", "+ZPadding:=", "5000", "-ZPaddingType:=",  "Percentage Offset", "-ZPadding:=", "5000"), Array("NAME:Attributes", "Name:=",   "Region", "Flags:=", "Wireframe#", "Color:=", "(255 0 0)", "Transparency:=", 0, "PartCoordinateSystem:=",   "Global", "UDMId:=", "", "MaterialValue:=", "" & Chr(34) & "vacuum" & Chr(34) & "", "SolveInside:=", true)');
+    fprintf(fid,'\noEditor.ChangeProperty Array("NAME:AllTabs", Array("NAME:Geometry3DAttributeTab", Array("NAME:PropServers", "Region"), Array("NAME:ChangedProps", Array("NAME:Name", "Value:=", "%s"))))',Name);
+
+end

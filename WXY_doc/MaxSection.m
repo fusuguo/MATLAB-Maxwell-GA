@@ -21,7 +21,11 @@ function MaxSection(fid, level, n, section_n)
             BoxName = strcat(BoxName, '_');
             i_n = num2str(i);
             BoxName = strcat(BoxName, i_n);
-            fprintf(fid, '%s,', BoxName);
+            if i == n
+                fprintf(fid, '%s', BoxName);
+            else
+                fprintf(fid, '%s,', BoxName);
+            end
         end
 
         fprintf(fid, '","NewPartsModelFlag:=", "Model"), Array("NAME:SectionToParameters", "CreateNewObjects:=", true, "SectionPlane:=", "YZ", "SectionCrossObject:=", false)');
